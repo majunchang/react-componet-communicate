@@ -1,22 +1,45 @@
 import React from 'react'
-import { Button } from 'antd'
+import axios from 'axios'
 
 export default class ExtendsComp extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      data: props.data
+      data: props.data,
+      testVar: 0,
+      obj: {
+        name: 1,
+        age: 2
+      }
     }
-    console.log('React.Component方式创建的组件')
-    console.log(this.props)
     this.changeColor = this.changeColor.bind(this)
   }
-
+  componentDidMount () {
+    this.changeColor() // 异步劫持
+  }
+  async changeColor () {
+    const res = await this.num()
+    console.log(this.state.testVar)
+    console.log(res)
+  }
+  num () {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: 'get',
+        url: '/article/getshe'
+      }).then(res => {
+        this.setState({
+          testVar: 1
+        })
+        resolve(res)
+      })
+    })
+  }
   render () {
+    console.log('触发了 render')
     return (
       <div>
-        <h1>我是新版创建组件的方法</h1>
-        <Button > 11111点我回去</Button>
+        <h1>React.extends创建组件的方式</h1>
       </div>
     )
   }

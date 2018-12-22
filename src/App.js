@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 import './App.css'
-import {BrowserRouter as Router, Route, Switch, Redirect, Link} from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+  Link
+} from 'react-router-dom'
 
 //  创建react的三种方式
 import NoStatusComp from './page/buildComponent/noStatusComp'
@@ -8,7 +14,10 @@ import ExtendsComp from './page/buildComponent/extendsComp'
 import Parent from './page/compCommunite/parentComp'
 // import createClassComp from './page/buildComponent/createClass'
 // import { Divider } from 'antd'
-import {Button} from 'antd'
+import { Button } from 'antd'
+
+//  高阶组件
+import HocProxy from './page/hoc/HocProxy'
 
 /*
 1  <BrowserRouter> 使用 HTML5 提供的 history API (pushState, replaceState 和 popstate 事件) 来保持 UI 和 URL 的同步。
@@ -23,65 +32,62 @@ import {Button} from 'antd'
 class App extends Component {
   constructor (props) {
     super(props)
-    this.goNoStatus = this.goNoStatus.bind(this)
-    this.goExtends = this.goExtends.bind(this)
-    this.goCreateClass = this.goCreateClass.bind(this)
-    console.log(this.props)
     this.state = {
-      text: '教师节快乐，感谢生命中出现过的老师，让似水年华没有苍白，教会我们听说读写思',
+      text:
+        '教师节快乐，感谢生命中出现过的老师，让似水年华没有苍白，教会我们听说读写思',
       flag: false
     }
-    this.changeFlag = this.changeFlag.bind(this)
-  }
-  goNoStatus () {
-    console.log(this.props)
-  }
-  goExtends () {
-
-  }
-  goCreateClass () {
-
-  }
-  changeFlag () {
-    this.setState({
-      flag: true
-    })
   }
   render () {
-    let {text, flag} = this.state
     return (
       <div>
         <Router>
           <div>
+            <h1> 组件 list </h1>
             <ul>
               <li>
                 <Button type='primary'>
-                  <Link to='/build/nostatus'>无状态组件</Link>
+                  <Link to='/build/nostatus'> 无状态组件 </Link>
                 </Button>
               </li>
               <li>
-                <Button ><Link to='/build/extends'>extends创建组件</Link></Button>
+                <Button>
+                  <Link to='/build/extends'> extends创建组件 </Link>
+                </Button>
               </li>
               <li>
                 <Button type='dashed'>
-                  <Link to='/compCommunicate'>进入父组件</Link>
+                  <Link to='/compCommunicate'> 组件传值(父子和兄弟) </Link>
                 </Button>
               </li>
-              <Button onClick={this.changeFlag}>改变一下</Button>
-
+              <li>
+                <Button type='primary'>
+                  <Link to='/HocProxy'> 高阶组件-属性代理 </Link>
+                </Button>
+              </li>
+              <li>
+                <Button type='primary'>
+                  <Link to='/reverseInhertit'> 高阶组件-反向继承 </Link>
+                </Button>
+              </li>
             </ul>
-            <h1 style={{'display': flag ? 'block' : 'none'}}>{text}</h1>
             <Switch>
-              <Route path='/' exact render={() => <Redirect to='/build/nostatus' />} />
+              <Route
+                path='/'
+                exact
+                render={() => <Redirect to='/build/nostatus' />}
+              />
               <Route path='/build/nostatus' component={NoStatusComp} />
               <Route path='/build/extends' component={ExtendsComp} />
               <Route path='/compCommunicate' component={Parent} />
+              {/* 高阶组件 属性代理 */}
+              <Route path='/HocProxy' component={HocProxy} />
+              {/* 高阶组件  反向继承 */}
+              <Route path='/reverseInhertit' component={Parent} />
             </Switch>
           </div>
-
         </Router>
       </div>
-
     )
   }
 }

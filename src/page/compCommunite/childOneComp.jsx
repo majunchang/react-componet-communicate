@@ -10,14 +10,14 @@ export default class Child extends React.Component {
   }
   changeColor () {
     emitter.emit('colorChange', 'deepskyblue')
-    console.log('emit了方法')
   }
   render () {
-    let {name} = this.props
+    let { name } = this.props
     return (
       <div>
         <h1>Hello, {name}</h1>
-        <Button onClick={this.changeColor}> 11111点我回去</Button>
+        <h1>  子组件1</h1>
+        <Button onClick={this.changeColor}> 点击 红色变成天蓝色</Button>
       </div>
     )
   }

@@ -5,6 +5,7 @@
   "dependencies": {
     "antd": "^3.9.1",
     "autoprefixer": "7.1.6",
+    "axios": "^0.18.0",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
@@ -51,6 +52,16 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
+  },
+  "proxy": {
+    "/upcui": {
+      "target": "http://yuanlin.yin.n.kunlun.iwm.name:12890",
+      "changeOrigin": true,
+      "secure": false,
+      "headers": {
+        "Cookie": "BAIDUID=982FF9CF70929C752CD7B4CF1F6890ED:FG=1; expires=Sat, 30-Nov-19 08:27:10 GMT; max-age=31536000; path=/; domain=.baidu.com; version=1"
+      }
+    }
   },
   "jest": {
     "collectCoverageFrom": [
