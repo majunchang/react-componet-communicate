@@ -34,5 +34,13 @@ button.ant-btn {
   margin: 10px;
 }
 
+.logo{
+  height: 80px;
+  line-height: 80px;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+}
+
 
 
