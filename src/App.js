@@ -33,7 +33,7 @@ import HocProxy from './page/hoc/HocProxy'
 const {
   Header, Content, Footer, Sider,
 } = Layout;
-const SubMenu = Menu.SubMenu;
+const SubMenu = Menu.SubMenu
 
 class App extends Component {
   constructor (props) {
