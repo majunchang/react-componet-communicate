@@ -8,8 +8,8 @@ import {
   HashHistory
 } from 'react-router-dom'
 import {
-  Layout, Menu, Breadcrumb, Icon,
-} from 'antd';
+  Layout, Menu, Breadcrumb, Icon
+} from 'antd'
 
 // 首页
 import HomeIndex from './page/index'
@@ -31,59 +31,90 @@ import HocProxy from './page/hoc/HocProxy'
 
 */
 const {
-  Header, Content, Footer, Sider,
-} = Layout;
+  Header, Content, Footer, Sider
+} = Layout
 const SubMenu = Menu.SubMenu
 
+let menuArr = [
+  {
+    path:'/',
+    submenu:false,
+    text:'主页',
+    icon:''
+  },
+  {
+    path:'/build/nostatus',
+    submenu:false,
+    text:'函数式无状态组件',
+    icon:''
+  },
+  {
+    path:'/build/extends',
+    submenu:false,
+    text:'extends方式创建组件',
+    icon:''
+  },
+  {
+    path:'/compCommunicate',
+    submenu:false,
+    text:'组件传值（父子和兄弟）',
+    icon:''
+  },
+  {
+    path:'/HocProxy',
+    submenu:false,
+    text:'高阶组件-属性代理',
+    icon:''
+  },
+  {
+    path:'/reverseInhertit',
+    submenu:false,
+    text:'高阶组件-反向继承',
+    icon:''
+  },
+]
 class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      collapsed: false,
+      collapsed: false
     }
-    this.handleClick = this.handleClick.bind(this)
   }
   onCollapse = (collapsed) => {
     console.log(collapsed);
     this.setState({ collapsed });
   }
-  handleClick(){
-    console.log(this.state);
-    console.log(this.props)
+  renderMenu(){
+    return (
+      <Menu theme='dark' defaultSelectedKeys={['0']} mode='inline'>
+      {
+        menuArr.map((item,index)=>{
+          return  <Menu.Item key={index}>
+          <Icon type={item.icon||'pie-chart'} />
+          <Link to={item.path} className='App-link'> {item.text} </Link>
+        </Menu.Item>
+        })
+      }
+      </Menu>
+    )
   }
   render () {
     return (
       <div>
-         <Router>
-           <div>
-         <Layout style={{ minHeight: '100vh' }}>
-        <Sider
-          collapsible
-          collapsed={this.state.collapsed}
-          onCollapse={this.onCollapse}
-          width={212}
-        >
-          <div className="logo" >
+        <Router>
+          <div>
+            <Layout style={{ minHeight: '100vh' }}>
+              <Sider
+                collapsible
+                collapsed={this.state.collapsed}
+                onCollapse={this.onCollapse}
+                width={212}
+              >
+                <div className='logo' >
                 念念不忘
-          </div>
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-            <Menu.Item key="1">
-              <Icon type="pie-chart" />
-              <span onClick={this.handleClick}>函数式无状态组件</span>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Icon type="desktop" />
-              <span>extends方式创建组件</span>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <Icon type="desktop" />
-              <span>高阶组件-属性代理</span>
-            </Menu.Item>
-            <Menu.Item key="4">
-              <Icon type="desktop" />
-              <span>高阶组件-反向继承</span>
-            </Menu.Item>
-            {/* <SubMenu
+                </div>
+                {this.renderMenu()}
+                  {/* <SubMenu
               key="sub1"
               title={<span><Icon type="user" /><span>User</span></span>}
             >
@@ -98,41 +129,34 @@ class App extends Component {
               <Menu.Item key="6">Team 1</Menu.Item>
               <Menu.Item key="8">Team 2</Menu.Item>
             </SubMenu> */}
-            <Menu.Item key="5">
-              <Icon type="file" />
-              <span>File</span>
-            </Menu.Item>
-          </Menu>
-        </Sider>
-        <Layout>
-          <Header style={{ background: '#fff', padding: 0 }} />
-          <Content style={{ margin: '0 16px' }}>
-            <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>面包屑</Breadcrumb.Item>
-              <Breadcrumb.Item>小面包</Breadcrumb.Item>
-            </Breadcrumb>
-            <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-       
-          <Switch>
-            <Route path='/' component={HomeIndex} exact />
-            <Route path='/build/nostatus' component={NoStatusComp} />
-            <Route path='/build/extends' component={ExtendsComp} />
-            <Route path='/compCommunicate' component={Parent} />
-            {/* 高阶组件 属性代理 */}
-            <Route path='/HocProxy' component={HocProxy} />
-            {/* 高阶组件  反向继承 */}
-            <Route path='/reverseInhertit' component={Parent} />
-          </Switch>
-       
-            </div>
-          </Content>
-          <Footer style={{ textAlign: 'center' }}>
-            react-guide  build by majunchang
-          </Footer>
-        </Layout>
-      </Layout>
-      </div>
-      </Router>
+              </Sider>
+              <Layout>
+                <Header style={{ background: '#fff', padding: 0 }} />
+                <Content style={{ margin: '0 16px' }}>
+                  <Breadcrumb style={{ margin: '16px 0' }}>
+                    <Breadcrumb.Item>面包屑</Breadcrumb.Item>
+                    <Breadcrumb.Item>小面包</Breadcrumb.Item>
+                  </Breadcrumb>
+                  <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+                    <Switch>
+                       <Route path='/' component={HomeIndex} exact />
+                       <Route path='/build/nostatus' component={NoStatusComp} />
+                       <Route path='/build/extends' component={ExtendsComp} />
+                       <Route path='/compCommunicate' component={Parent} />
+                       {/* 高阶组件 属性代理 */}
+                       <Route path='/HocProxy' component={HocProxy} />
+                       {/* 高阶组件  反向继承 */}
+                       <Route path='/reverseInhertit' component={Parent} />
+                     </Switch>
+                  </div>
+                </Content>
+                <Footer style={{ textAlign: 'center' }}>
+                    react-guide  build by majunchang
+                </Footer>
+              </Layout>
+            </Layout>
+          </div>
+        </Router>
       </div>
     )
   }
