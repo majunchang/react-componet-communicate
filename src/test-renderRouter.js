@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Route,
   Switch,
   Link,
@@ -10,17 +10,9 @@ import {
 import {
   Layout, Menu, Breadcrumb, Icon
 } from 'antd'
+import routes from './router'
 
-// 首页
-// import HomeIndex from './page/index'
-//  创建react的三种方式
-import NoStatusComp from './page/buildComponent/noStatusComp'
-import ExtendsComp from './page/buildComponent/extendsComp'
-import Parent from './page/compCommunite/parentComp'
-import ExtendsCompTable from './page/buildComponent/extendsCompTable'
 
-//  高阶组件
-import HocProxy from './page/hoc/HocProxy'
 
 /*
 1  <BrowserRouter> 使用 HTML5 提供的 history API (pushState, replaceState 和 popstate 事件) 来保持 UI 和 URL 的同步。
@@ -31,34 +23,10 @@ import HocProxy from './page/hoc/HocProxy'
 6  switch  用于渲染与路径匹配的第一个子 <Route> 或 <Redirect>。
 
 */
-import  Loadable from 'react-loadable'
-const  Loading = ()=> (<div> Loading......</div>)
-
-const HomeIndexLoadable = Loadable({
-  loader:() => import('./page/index'),
-  loading:Loading
-})
-const NoStatusCompLoadable = Loadable({
-  loader:()=> import('./page/buildComponent/noStatusComp'),
-  loading:Loading
-})
-const ExtendsCompLoadable = Loadable({
-  loader:()=> import ('./page/buildComponent/extendsComp'),
-  loading:Loading
-})
-const ExtendsCompTableLoadable = Loadable({
-  loader:()=>import('./page/buildComponent/extendsCompTable'),
-  loading:Loading
-})
-
-const ParentLoadable = Loadable({
-  loader:()=> import ('./page/compCommunite/parentComp'),
-  loading:Loading
-})
 
 
 
-console.log(ExtendsCompLoadable);
+
 const {
   Header, Content, Footer, Sider
 } = Layout
@@ -133,7 +101,15 @@ class App extends Component {
       </Menu>
     )
   }
+  renderRouter(){
+    return (
+      <Switch>
+      {routes.map((item, i) => <Route exact path={item.path} component={item.component} />)}
+      </Switch>
+    )
+  }
   render () {
+    console.log(routes);
     return (
       <div>
         <Router>
@@ -158,17 +134,7 @@ class App extends Component {
                     <Breadcrumb.Item>小面包</Breadcrumb.Item>
                   </Breadcrumb>
                   <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-                    <Switch>
-                       <Route path='/' component={HomeIndexLoadable} exact />
-                       <Route path='/build/nostatus' component={NoStatusCompLoadable} />
-                       <Route path='/build/extends' component={ExtendsCompLoadable} />
-                       <Route path='/build/extendsCompTable' component={ExtendsCompTableLoadable} />
-                       <Route path='/compCommunicate' component={ParentLoadable} />
-                       {/* 高阶组件 属性代理 */}
-                       <Route path='/HocProxy' component={HocProxy} />
-                       {/* 高阶组件  反向继承 */}
-                       <Route path='/reverseInhertit' component={Parent} />
-                     </Switch>
+                    {this.renderRouter()}
                   </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>

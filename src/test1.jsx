@@ -12,12 +12,11 @@ import {
 } from 'antd'
 
 // 首页
-// import HomeIndex from './page/index'
+import HomeIndex from './page/index'
 //  创建react的三种方式
 import NoStatusComp from './page/buildComponent/noStatusComp'
 import ExtendsComp from './page/buildComponent/extendsComp'
 import Parent from './page/compCommunite/parentComp'
-import ExtendsCompTable from './page/buildComponent/extendsCompTable'
 
 //  高阶组件
 import HocProxy from './page/hoc/HocProxy'
@@ -31,34 +30,28 @@ import HocProxy from './page/hoc/HocProxy'
 6  switch  用于渲染与路径匹配的第一个子 <Route> 或 <Redirect>。
 
 */
-import  Loadable from 'react-loadable'
-const  Loading = ()=> (<div> Loading......</div>)
+// import  Loadable from 'react-loadable'
+// const  Loading = ()=> (<div> Loading......</div>)
 
-const HomeIndexLoadable = Loadable({
-  loader:() => import('./page/index'),
-  loading:Loading
-})
-const NoStatusCompLoadable = Loadable({
-  loader:()=> import('./page/buildComponent/noStatusComp'),
-  loading:Loading
-})
-const ExtendsCompLoadable = Loadable({
-  loader:()=> import ('./page/buildComponent/extendsComp'),
-  loading:Loading
-})
-const ExtendsCompTableLoadable = Loadable({
-  loader:()=>import('./page/buildComponent/extendsCompTable'),
-  loading:Loading
-})
-
-const ParentLoadable = Loadable({
-  loader:()=> import ('./page/compCommunite/parentComp'),
-  loading:Loading
-})
+// const HomeIndexLoadable = Loadable({
+//   loader:() => import('./page/index'),
+//   loading:Loading
+// })
+// const NoStatusCompLoadable = Loadable({
+//   loader:()=> import('./page/buildComponent/noStatusComp'),
+//   loading:Loading
+// })
+// const ExtendsCompLoadable = Loadable({
+//   loader:()=> import ('./page/buildComponent/extendsComp'),
+//   loading:Loading
+// })
+// const ParentLoadable = Loadable({
+//   loader:()=> import ('./page/compCommunite/parentComp'),
+//   loading:Loading
+// })
 
 
 
-console.log(ExtendsCompLoadable);
 const {
   Header, Content, Footer, Sider
 } = Layout
@@ -81,12 +74,6 @@ let menuArr = [
     path:'/build/extends',
     submenu:false,
     text:'extends方式创建组件',
-    icon:''
-  },
-  {
-    path:'/build/extendsCompTable',
-    submenu:false,
-    text:'extends方式创建 表格组件',
     icon:''
   },
   {
@@ -149,6 +136,21 @@ class App extends Component {
                 念念不忘
                 </div>
                 {this.renderMenu()}
+                  {/* <SubMenu
+              key="sub1"
+              title={<span><Icon type="user" /><span>User</span></span>}
+            >
+              <Menu.Item key="3">Tom</Menu.Item>
+              <Menu.Item key="4">Bill</Menu.Item>
+              <Menu.Item key="5">Alex</Menu.Item>
+            </SubMenu>
+            <SubMenu
+              key="sub2"
+              title={<span><Icon type="team" /><span>Team</span></span>}
+            >
+              <Menu.Item key="6">Team 1</Menu.Item>
+              <Menu.Item key="8">Team 2</Menu.Item>
+            </SubMenu> */}
               </Sider>
               <Layout>
                 <Header style={{ background: '#fff', padding: 0 }} />
@@ -159,11 +161,10 @@ class App extends Component {
                   </Breadcrumb>
                   <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
                     <Switch>
-                       <Route path='/' component={HomeIndexLoadable} exact />
-                       <Route path='/build/nostatus' component={NoStatusCompLoadable} />
-                       <Route path='/build/extends' component={ExtendsCompLoadable} />
-                       <Route path='/build/extendsCompTable' component={ExtendsCompTableLoadable} />
-                       <Route path='/compCommunicate' component={ParentLoadable} />
+                       <Route path='/' component={HomeIndex} exact />
+                       <Route path='/build/nostatus' component={NoStatusComp} />
+                       <Route path='/build/extends' component={ExtendsComp} />
+                       <Route path='/compCommunicate' component={Parent} />
                        {/* 高阶组件 属性代理 */}
                        <Route path='/HocProxy' component={HocProxy} />
                        {/* 高阶组件  反向继承 */}
