@@ -17,6 +17,8 @@ class ChildTwoComp extends Component {
     }
   }
   componentDidMount () {
+     console.log(this.context);
+     this.context.color = 'green'
     this.eventEmitter = emitter.addListener('colorChange', color => {
       this.setState(
         {
