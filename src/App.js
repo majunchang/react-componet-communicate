@@ -22,6 +22,10 @@ import ExtendsCompTable from './page/buildComponent/extendsCompTable'
 //  高阶组件
 import HocProxy from './page/hoc/HocProxy'
 
+
+// 调研react-dnd 
+import  ReactDnd from './page/reactDnd/index'
+
 /*
 1  <BrowserRouter> 使用 HTML5 提供的 history API (pushState, replaceState 和 popstate 事件) 来保持 UI 和 URL 的同步。
 2  <HashRouter> 使用 URL 的 hash 部分（即 window.location.hash）来保持 UI 和 URL 的同步。(兼容老版本的浏览器)
@@ -56,6 +60,10 @@ const ParentLoadable = Loadable({
   loading:Loading
 })
 
+const ReactDndLoadable = Loadable({
+  loader:()=>import('./page/reactDnd/index'),
+  loading:Loading
+})
 
 
 console.log(ExtendsCompLoadable);
@@ -105,6 +113,12 @@ let menuArr = [
     path:'/reverseInhertit',
     submenu:false,
     text:'高阶组件-反向继承',
+    icon:''
+  },
+  {
+    path:'/ReactDnd',
+    submenu:false,
+    text:'拖拽组件',
     icon:''
   },
 ]
@@ -168,6 +182,7 @@ class App extends Component {
                        <Route path='/HocProxy' component={HocProxy} />
                        {/* 高阶组件  反向继承 */}
                        <Route path='/reverseInhertit' component={Parent} />
+                       <Route path='/ReactDnd' component={ReactDndLoadable} />
                      </Switch>
                   </div>
                 </Content>
