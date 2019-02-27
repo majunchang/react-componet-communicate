@@ -20,11 +20,13 @@ import Parent from './page/compCommunite/parentComp'
 import ExtendsCompTable from './page/buildComponent/extendsCompTable'
 
 //  高阶组件
-import HocProxy from './page/hoc/HocProxy'
+// import HocProxy from './page/hoc/HocProxy/HocProxy'
+import HocProxy from './page/hoc/HocProxy/index'
+// 高阶组件 反向继承
+import HocReverse from './page/hoc/HocReverse'
 
-
-// 调研react-dnd 
-import  ReactDnd from './page/reactDnd/index'
+// 调研react-dnd
+import ReactDnd from './page/reactDnd/index'
 
 /*
 1  <BrowserRouter> 使用 HTML5 提供的 history API (pushState, replaceState 和 popstate 事件) 来保持 UI 和 URL 的同步。
@@ -35,38 +37,37 @@ import  ReactDnd from './page/reactDnd/index'
 6  switch  用于渲染与路径匹配的第一个子 <Route> 或 <Redirect>。
 
 */
-import  Loadable from 'react-loadable'
-const  Loading = ()=> (<div> Loading......</div>)
+import Loadable from 'react-loadable'
+const Loading = () => (<div> Loading......</div>)
 
 const HomeIndexLoadable = Loadable({
-  loader:() => import('./page/index'),
-  loading:Loading
+  loader: () => import('./page/index'),
+  loading: Loading
 })
 const NoStatusCompLoadable = Loadable({
-  loader:()=> import('./page/buildComponent/noStatusComp'),
-  loading:Loading
+  loader: () => import('./page/buildComponent/noStatusComp'),
+  loading: Loading
 })
 const ExtendsCompLoadable = Loadable({
-  loader:()=> import ('./page/buildComponent/extendsComp'),
-  loading:Loading
+  loader: () => import('./page/buildComponent/extendsComp'),
+  loading: Loading
 })
 const ExtendsCompTableLoadable = Loadable({
-  loader:()=>import('./page/buildComponent/extendsCompTable'),
-  loading:Loading
+  loader: () => import('./page/buildComponent/extendsCompTable'),
+  loading: Loading
 })
 
 const ParentLoadable = Loadable({
-  loader:()=> import ('./page/compCommunite/parentComp'),
-  loading:Loading
+  loader: () => import('./page/compCommunite/parentComp'),
+  loading: Loading
 })
 
 const ReactDndLoadable = Loadable({
-  loader:()=>import('./page/reactDnd/index'),
-  loading:Loading
+  loader: () => import('./page/reactDnd/index'),
+  loading: Loading
 })
 
-
-console.log(ExtendsCompLoadable);
+console.log(ExtendsCompLoadable)
 const {
   Header, Content, Footer, Sider
 } = Layout
@@ -74,53 +75,53 @@ const SubMenu = Menu.SubMenu
 
 let menuArr = [
   {
-    path:'/',
-    submenu:false,
-    text:'主页',
-    icon:''
+    path: '/',
+    submenu: false,
+    text: '主页',
+    icon: ''
   },
   {
-    path:'/build/nostatus',
-    submenu:false,
-    text:'函数式无状态组件',
-    icon:''
+    path: '/build/nostatus',
+    submenu: false,
+    text: '函数式无状态组件',
+    icon: ''
   },
   {
-    path:'/build/extends',
-    submenu:false,
-    text:'extends方式创建组件',
-    icon:''
+    path: '/build/extends',
+    submenu: false,
+    text: 'extends方式创建组件',
+    icon: ''
   },
   {
-    path:'/build/extendsCompTable',
-    submenu:false,
-    text:'extends方式创建 表格组件',
-    icon:''
+    path: '/build/extendsCompTable',
+    submenu: false,
+    text: 'extends方式创建 表格组件',
+    icon: ''
   },
   {
-    path:'/compCommunicate',
-    submenu:false,
-    text:'组件传值（父子和兄弟）',
-    icon:''
+    path: '/compCommunicate',
+    submenu: false,
+    text: '组件传值（父子和兄弟）',
+    icon: ''
   },
   {
-    path:'/HocProxy',
-    submenu:false,
-    text:'高阶组件-属性代理',
-    icon:''
+    path: '/HocProxy',
+    submenu: false,
+    text: '高阶组件-属性代理',
+    icon: ''
   },
   {
-    path:'/reverseInhertit',
-    submenu:false,
-    text:'高阶组件-反向继承',
-    icon:''
+    path: '/reverseInhertit',
+    submenu: false,
+    text: '高阶组件-反向继承',
+    icon: ''
   },
   {
-    path:'/ReactDnd',
-    submenu:false,
-    text:'拖拽组件',
-    icon:''
-  },
+    path: '/ReactDnd',
+    submenu: false,
+    text: '拖拽组件',
+    icon: ''
+  }
 ]
 class App extends Component {
   constructor (props) {
@@ -130,20 +131,19 @@ class App extends Component {
     }
   }
   onCollapse = (collapsed) => {
-    console.log(collapsed);
-    this.setState({ collapsed });
+    this.setState({ collapsed })
   }
-  renderMenu(){
+  renderMenu () {
     return (
       <Menu theme='dark' defaultSelectedKeys={['0']} mode='inline'>
-      {
-        menuArr.map((item,index)=>{
-          return  <Menu.Item key={index}>
-          <Icon type={item.icon||'pie-chart'} />
-          <Link to={item.path} className='App-link'> {item.text} </Link>
-        </Menu.Item>
-        })
-      }
+        {
+          menuArr.map((item, index) => {
+            return <Menu.Item key={index}>
+            <Icon type={item.icon || 'pie-chart'} />
+              <Link to={item.path} className='App-link'> {item.text} </Link>
+            </Menu.Item>
+          })
+        }
       </Menu>
     )
   }
@@ -173,17 +173,17 @@ class App extends Component {
                   </Breadcrumb>
                   <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
                     <Switch>
-                       <Route path='/' component={HomeIndexLoadable} exact />
-                       <Route path='/build/nostatus' component={NoStatusCompLoadable} />
-                       <Route path='/build/extends' component={ExtendsCompLoadable} />
-                       <Route path='/build/extendsCompTable' component={ExtendsCompTableLoadable} />
-                       <Route path='/compCommunicate' component={ParentLoadable} />
-                       {/* 高阶组件 属性代理 */}
-                       <Route path='/HocProxy' component={HocProxy} />
-                       {/* 高阶组件  反向继承 */}
-                       <Route path='/reverseInhertit' component={Parent} />
-                       <Route path='/ReactDnd' component={ReactDndLoadable} />
-                     </Switch>
+                      <Route path='/' component={HomeIndexLoadable} exact />
+                      <Route path='/build/nostatus' component={NoStatusCompLoadable} />
+                      <Route path='/build/extends' component={ExtendsCompLoadable} />
+                      <Route path='/build/extendsCompTable' component={ExtendsCompTableLoadable} />
+                      <Route path='/compCommunicate' component={ParentLoadable} />
+                      {/* 高阶组件 属性代理 */}
+                      <Route path='/HocProxy' component={HocProxy} />
+                      {/* 高阶组件  反向继承 */}
+                      <Route path='/reverseInhertit' component={HocReverse} />
+                      <Route path='/ReactDnd' component={ReactDndLoadable} />
+                    </Switch>
                   </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>

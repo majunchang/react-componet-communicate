@@ -366,6 +366,9 @@ export default new EventEmitter()
 2. [redux](http://www.redux.org.cn/)  （比较推荐）
 
 
+### 支持es7语法
+
+### 支持 method = （）=> {...}
 
 
 
