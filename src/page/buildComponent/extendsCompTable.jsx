@@ -58,10 +58,27 @@ const data = [{
 export default class ExtendsCompTable extends React.Component {
   constructor (props) {
     super(props)
-    this.state  = {
-      name: 'react测试this指向'
+    this.state = {
+      name: 'react测试this指向',
+      val: 0
     }
     this.handler = this.handler.bind(this)
+  }
+
+  componentDidMount () {
+    this.setState({ val: this.state.val + 1 })
+    console.log(this.state.val) // 第 1 次 log
+
+    this.setState({ val: this.state.val + 1 })
+    console.log(this.state.val) // 第 2 次 log
+
+    setTimeout(() => {
+      this.setState({ val: this.state.val + 1 })
+      console.log(this.state.val) // 第 3 次 log
+
+      this.setState({ val: this.state.val + 1 })
+      console.log(this.state.val) // 第 4 次 log
+    }, 0)
   }
 
   handler () {
@@ -71,16 +88,16 @@ export default class ExtendsCompTable extends React.Component {
     let { name } = this.state
     return <Button>{name}</Button>
   }
-  handlerArrow=()=> {
-    console.log(this);
+  handlerArrow=() => {
+    console.log(this)
     message.info('点击了箭头函数绑定按钮,通过箭头函数绑定 this')
   }
-  handleInnerArrow(){
-    console.log(this);
+  handleInnerArrow () {
+    console.log(this)
     message.info('点击了箭头函数绑定,通过 bind 绑定 this')
   }
-  handleBind(){
-    console.log(this);
+  handleBind () {
+    console.log(this)
     message.info('点击了bind')
   }
   render () {
@@ -89,8 +106,8 @@ export default class ExtendsCompTable extends React.Component {
         <h1>234567890</h1>
         <Button type='primary' onClick={this.handler}>bind（this）</Button>
         {/* 这种直接调用的方式不需要绑定 this */}
-        {this.renderDom()}  
-        {/* 这种  handlerArrow=()=> {...}的形式  虽然可以用 但是不太建议*/}
+        {this.renderDom()}
+        {/* 这种  handlerArrow=()=> {...}的形式  虽然可以用 但是不太建议 */}
         <Button type='primary' onClick={this.handlerArrow}>箭头函数绑定</Button>
         <Button type='primary' onClick={() => {
           this.handleInnerArrow()
